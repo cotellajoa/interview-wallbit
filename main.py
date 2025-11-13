@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from routes import exchange
+from api import exchange_routes
 
 app = FastAPI()
 
-app.include_router(exchange.route)
+app.include_router(exchange_routes.route)
