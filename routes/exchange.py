@@ -1,13 +1,14 @@
-from fastapi import APIRouter, HTTPException
-import httpx
-import asyncio
+from fastapi import APIRouter
 
-from services.service import dolar_blue, dolar_bolsa, dolar_contado_con_liqui, dolar_cripto, dolar_mayorista, dolar_oficial, dolar_tarjeta, todos_los_dolares
+from infrastructure.adapters.dolar_api_adapter import DolarApiAdapter
 
 route = APIRouter(prefix="/api/exchange", tags=["exchange"])
 
+dolar_adapter = DolarApiAdapter()
+
+
 @route.get("/")
-async def get_dolar():
-    res = await todos_los_dolares()
-    return res
+async def get_exchange_rates():
+    result = await dolar_adapter.get_all_exchange_rates()
+    return result
     
